@@ -1,5 +1,4 @@
-const express = require("express");
-const { default: jwtDecode } = require("jwt-decode");
+const jwt = require("jsonwebtoken");
 const app = express();
 const port = 9000;
 
@@ -7,9 +6,8 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use((req, res, next) => {
     const auth = req.headers.authorization;
-    console.log("auth is", auth.split(" ")[1]);
-    const decoded = jwtDecode(auth.split(" ")[1]);
-    if (decoded.app !== "reposit") res.sendStatus(401);
+    const decoded = jwt.verify(auth.split(" ")[1], "floppydisk");
+    if (!decoded || decoded.app !== "reposit") res.sendStatus(401);
     else next();
 });
 
