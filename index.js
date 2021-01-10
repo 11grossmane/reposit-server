@@ -7,9 +7,13 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use((req, res, next) => {
     const auth = req.headers.authorization;
-    const decoded = jwt.verify(auth.split(" ")[1], "floppydisk");
-    if (!decoded || decoded.app !== "reposit") res.sendStatus(401);
-    else next();
+    try {
+        const decoded = jwt.verify(auth.split(" ")[1], "floppydisk");
+        if (decoded.app !== "reposit") res.sendStatus(401);
+        else next();
+    } catch (e) {
+        res.sendStatus(401);
+    }
 });
 
 app.get("/creds", async (req, res) => {
