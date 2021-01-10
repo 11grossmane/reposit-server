@@ -1,13 +1,16 @@
 const express = require("express");
-const functions = require("firebase-functions");
 const app = express();
 const port = 9000;
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.get("/creds", async (req, res) => {
-    const { id, sec } = functions.config();
-    res.send({ id, sec });
+    // if (res.getHeader('')){
+    //   res.status(401)
+    //   return
+    // }
+
+    res.send({ id: process.env.ID, sec: process.env.SEC });
 });
 
 app.listen(8000, () => {
