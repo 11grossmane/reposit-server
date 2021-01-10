@@ -9,7 +9,7 @@ app.get("/creds", async (req, res) => {
     //   res.status(401)
     //   return
     // }
-
+    console.log(process.env);
     res.send({ id: process.env.ID, sec: process.env.SEC });
 });
 
