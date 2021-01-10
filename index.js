@@ -1,5 +1,5 @@
 const express = require("express");
-const jwt = require("jwt-express");
+const { default: jwtDecode } = require("jwt-decode");
 const app = express();
 const port = 9000;
 
