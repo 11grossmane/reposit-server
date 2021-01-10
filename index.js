@@ -13,6 +13,6 @@ app.get("/creds", async (req, res) => {
     res.send({ id: process.env.ID, sec: process.env.SEC });
 });
 
-app.listen(8000, () => {
-    console.log("listening on 8000");
+app.listen(process.env.PORT, () => {
+    console.log("listening on" + process.env.PORT);
 });
